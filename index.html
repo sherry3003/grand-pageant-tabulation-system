@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171510">
+  <title>Grand Pageant Tabulation System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="Grand Pageant home">
+      <span class="brand-crown">♛</span>
+      <span><strong>Grand Pageant</strong><small>TABULATION SYSTEM</small></span>
+    </a>
+    <div class="side-label">WORKSPACE</div>
+    <nav id="navigation" aria-label="Main navigation">
+      <button class="nav active" data-page="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav" data-page="contestants"><span>♙</span> Contestants</button>
+      <button class="nav" data-page="judges"><span>♧</span> Judges</button>
+      <button class="nav" data-page="criteria"><span>☷</span> Scoring Criteria</button>
+      <button class="nav" data-page="scores"><span>✎</span> Score Entry</button>
+      <button class="nav" data-page="results"><span>♛</span> Final Results</button>
+      <button class="nav" data-page="data-tools"><span>⇧</span> Data & Backup</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="status-dot"></div>
+      <div><strong>Local demo mode</strong><small>Data saved in this browser</small></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="top-heading">
+        <p class="eyebrow">PAGEANT MANAGEMENT / <span id="breadcrumb">OVERVIEW</span></p>
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <span class="event-chip"><span class="live-dot"></span><span id="top-event-name">Grand Pageant 2026</span></span>
+        <button class="btn btn-gold btn-small" id="event-settings">⚙ Event settings</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="page">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="hero-kicker">THE OFFICIAL TABULATION DESK</span>
+          <h2>Every score.<br><em>Every moment.</em> Counted.</h2>
+          <p>One organized workspace for contestants, judges, transparent scoring, and final pageant results.</p>
+          <button class="btn btn-gold" data-goto="scores">Enter scores <span>→</span></button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="hero-crown">♛</div>
+          <div class="hero-star star-one">✦</div>
+          <div class="hero-star star-two">✧</div>
+          <div class="hero-caption">EXCELLENCE <span>•</span> ELEGANCE <span>•</span> INTEGRITY</div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Registered contestants</span><span class="stat-icon">♙</span></div><strong id="stat-contestants">0</strong><small>Contestants in this event</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Judging panel</span><span class="stat-icon">♧</span></div><strong id="stat-judges">0</strong><small>Registered judges</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Scoring criteria</span><span class="stat-icon">☷</span></div><strong id="stat-criteria">0</strong><small id="stat-weight">Total weight: 0%</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Scoring completion</span><span class="stat-icon">✓</span></div><strong id="stat-completion">0%</strong><small id="stat-score-count">0 of 0 score entries</small><div class="mini-progress"><span id="stat-progress"></span></div></article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel leaderboard-panel">
+          <div class="panel-heading"><div><p class="eyebrow">LIVE STANDINGS</p><h3>Leaderboard preview</h3></div><button class="text-link" data-goto="results">Full results →</button></div>
+          <div id="dashboard-leaderboard"></div>
+        </section>
+        <section class="panel quick-panel">
+          <div class="panel-heading"><div><p class="eyebrow">GET STARTED</p><h3>Quick actions</h3></div></div>
+          <button class="quick-action" data-goto="contestants"><span class="quick-icon">＋</span><span><strong>Add contestant</strong><small>Register a new participant</small></span><b>→</b></button>
+          <button class="quick-action" data-goto="judges"><span class="quick-icon">♧</span><span><strong>Manage judges</strong><small>Update your judging panel</small></span><b>→</b></button>
+          <button class="quick-action" data-goto="criteria"><span class="quick-icon">☷</span><span><strong>Configure criteria</strong><small>Set weights to total 100%</small></span><b>→</b></button>
+          <button class="quick-action" data-goto="data-tools"><span class="quick-icon">⇧</span><span><strong>Backup your data</strong><small>Export a JSON backup</small></span><b>→</b></button>
+        </section>
+      </div>
+      <div class="notice"><span>ⓘ</span><div><strong>Before announcing winners</strong><p>Verify that every contestant has a score from every judge for every criterion, the weights total exactly 100%, and any tie is resolved using your committee's pre-approved rule.</p></div></div>
+    </section>
+
+    <section id="contestants" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">PARTICIPANT DIRECTORY</p><h3>Contestant management</h3><p class="subtext">Register and maintain contestant information.</p></div><span class="count-pill" id="contestant-total">0 contestants</span></div>
+        <form id="contestant-form" class="form-grid">
+          <label>Contestant number<input id="c-number" type="number" min="1" step="1" placeholder="e.g. 1" required></label>
+          <label>Full name<input id="c-name" maxlength="100" placeholder="Contestant full name" required></label>
+          <label>Representing<input id="c-represent" maxlength="120" placeholder="School, city, or barangay" required></label>
+          <button class="btn btn-gold form-submit" type="submit" id="contestant-submit">＋ Add contestant</button>
+        </form>
+        <div class="table-toolbar"><label class="search-box"><span>⌕</span><input id="contestant-search" type="search" placeholder="Search name, number, or representation..." aria-label="Search contestants"></label><span class="muted" id="contestant-search-count"></span></div>
+        <div id="contestant-table" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section id="judges" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">JUDGING PANEL</p><h3>Judge management</h3><p class="subtext">Keep the judge list organized for score entry.</p></div><span class="count-pill" id="judge-total">0 judges</span></div>
+        <form id="judge-form" class="form-grid">
+          <label>Judge name<input id="j-name" maxlength="100" placeholder="Full name" required></label>
+          <label>Position / profession<input id="j-position" maxlength="120" placeholder="e.g. Educator, Designer" required></label>
+          <button class="btn btn-gold form-submit" type="submit">＋ Add judge</button>
+        </form>
+        <div id="judge-table" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section id="criteria" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">SCORING CONFIGURATION</p><h3>Scoring criteria</h3><p class="subtext">Every criterion contributes its configured percentage to the final weighted score.</p></div><span class="count-pill" id="criteria-total">0 criteria</span></div>
+        <div class="weight-status" id="weight-status" role="status"></div>
+        <form id="criteria-form" class="form-grid">
+          <label>Criterion name<input id="cr-name" maxlength="100" placeholder="e.g. Evening Gown" required></label>
+          <label>Weight (%)<input id="cr-weight" type="number" min="0.01" max="100" step="0.01" placeholder="25" required></label>
+          <button class="btn btn-gold form-submit" type="submit">＋ Add criterion</button>
+        </form>
+        <div id="criteria-table" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section id="scores" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">JUDGE SCORE SHEET</p><h3>Score entry</h3><p class="subtext">One score per contestant, judge, and criterion. Re-entering the same combination updates the existing score.</p></div></div>
+        <div class="notice compact"><span>ⓘ</span><div><strong>Scoring rule</strong><p>Scores must be between 0 and 100. Final results remain provisional until all required entries are complete.</p></div></div>
+        <form id="score-form" class="form-grid">
+          <label>Contestant<select id="s-contestant" required></select></label>
+          <label>Judge<select id="s-judge" required></select></label>
+          <label>Criterion<select id="s-criterion" required></select></label>
+          <label>Score (0–100)<input id="s-value" type="number" min="0" max="100" step="0.01" placeholder="Enter score" required></label>
+          <button class="btn btn-gold form-submit" type="submit">Save score</button>
+        </form>
+        <div class="score-summary" id="score-summary"></div>
+        <div class="table-toolbar"><label class="search-box"><span>⌕</span><input id="score-search" type="search" placeholder="Search scores..." aria-label="Search score entries"></label></div>
+        <div id="score-table" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section id="results" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">FINAL TABULATION</p><h3>Results & rankings</h3><p class="subtext">Weighted totals are calculated from criterion averages across judges.</p></div><button class="btn btn-dark btn-small" id="print-results">▤ Print results</button></div>
+        <div id="results-status" class="notice compact"></div>
+        <div id="podium" class="podium"></div>
+        <div class="panel-heading results-table-heading"><div><h3>Complete leaderboard</h3><p class="subtext">Incomplete entries are marked provisional. Equal totals are shown as ties unless a committee rule is applied.</p></div><button class="btn btn-outline btn-small" id="export-results">↓ Export CSV</button></div>
+        <div id="final-results" class="table-wrap"></div>
+      </section>
+    </section>
+
+    <section id="data-tools" class="page hidden">
+      <section class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">DATA MANAGEMENT</p><h3>Export, backup & restore</h3><p class="subtext">Keep a copy of your pageant records before making major changes.</p></div></div>
+        <div class="tool-grid">
+          <article class="tool-card"><span class="tool-symbol">⇩</span><h4>Export results to CSV</h4><p>Download a spreadsheet-friendly leaderboard for reports and review.</p><button class="btn btn-gold" id="tool-export-csv">Export CSV</button></article>
+          <article class="tool-card"><span class="tool-symbol">▧</span><h4>Download JSON backup</h4><p>Save the event, contestants, judges, criteria, and score entries in one file.</p><button class="btn btn-gold" id="tool-backup">Download backup</button></article>
+          <article class="tool-card"><span class="tool-symbol">↥</span><h4>Restore from backup</h4><p>Replace current browser data with a previously downloaded valid backup.</p><button class="btn btn-outline" id="tool-restore">Choose backup file</button><input id="restore-file" type="file" accept=".json,application/json" hidden></article>
+          <article class="tool-card danger-card"><span class="tool-symbol">⌫</span><h4>Reset demo data</h4><p>Restore the sample contestants, judges, criteria, and empty scores. Export a backup first if needed.</p><button class="btn btn-danger" id="reset-demo">Reset demo data</button></article>
+        </div>
+        <div class="notice"><span>⚠</span><div><strong>Prototype data storage</strong><p>Records are stored in this browser on this device only. This demo has no secure login, shared database, or multi-user synchronization. Do not use it as the sole official record for a live event.</p></div></div>
+      </section>
+    </section>
+
+    <footer>GRAND PAGEANT TABULATION SYSTEM <span>•</span> Academic Project Prototype</footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
